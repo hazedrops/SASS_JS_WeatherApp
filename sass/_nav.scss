@@ -1,0 +1,108 @@
+nav {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: $background-color-dark;
+
+  .nav-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+
+    div {
+      .logo {
+        width: 4em;
+        height: 4em;
+      }
+    }
+
+    .searchBar {
+      width: 60%;
+      max-width: 70%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid $search-bar-border;
+      border-radius: 400px;
+      padding: 0.2rem 0.25rem 0.2rem 0.75rem;
+
+      input[type='text'] {
+        background: transparent;
+        color: $input-color;
+        flex-grow: 1;
+        font-size: 1em;
+        text-align: left;
+        letter-spacing: 0.1em;
+        border: 0;
+        outline: none;
+        min-width: 150px;
+
+        @include mq(768px) {
+          font-size: 1.25rem;
+        }
+      }
+
+      ::placeholder {
+        color: $input-color;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .button {
+        cursor: pointer;
+        border: 0;
+        background: transparent;
+        min-width: 48px;
+        min-height: 48px;
+        outline: none;
+
+        i {
+          font-family: 'Font Awesome 5 Free';
+          font-size: 1rem;
+          color: $input-color;
+
+          @include mq(768px) {
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .searchButton:hover,
+      .searchButton:focus {
+        i {
+          color: $logo-color;
+        }
+      }
+
+      .clear {
+        justify-content: center;
+        align-items: center;
+        color: $input-color;
+        border-right: thin solid $search-bar-border;
+
+        @include mq(768px) {
+          padding: 0 1rem;
+        }
+      }
+
+      .clear:hover,
+      .clear:focus {
+        i {
+          color: $logo-color;
+        }
+      }
+    }
+
+    .modeSelector {
+      background: $background-color-light;
+      padding: 0.3rem;
+      border-radius: 50%;
+    }
+  }
+}

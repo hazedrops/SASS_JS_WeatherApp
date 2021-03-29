@@ -1,0 +1,49 @@
+$background-color-dark: #005590;
+$background-color-light: #4b81c1;
+$text-color: #444;
+$logo-color: #60b0f4;
+$search-bar-border: #e6e6e6;
+$input-color: #f5f5f5;
+
+@mixin mq($size) {
+  @media only screen and (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  animation: #{$str};
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  .container {
+    // margin: 0;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    // justify-content: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    color: white;
+  }
+
+  // @include mq(1025px) {
+  //   width: 60vw;
+  // }
+}
