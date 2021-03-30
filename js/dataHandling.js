@@ -31,7 +31,7 @@ export const retrieveLatLong = async (searchTerm) => {
 const getGeoCodeData = (searchTerm) => {
   // const maxChars = getMaxChars();
 
-  const rawSearchString = `http://www.mapquestapi.com/geocoding/v1/address?key=Pzhrs2ylWGmTmpobTAkxGdGaVrdCIfhU&location=${searchTerm}`;
+  const rawSearchString = `http://www.mapquestapi.com/geocoding/v1/address?key=MyKey&location=${searchTerm}`;
 
   const searchString = encodeURI(rawSearchString);
   
@@ -73,7 +73,7 @@ const requestWeatherData = async (searchString) => {
 }
 
 const retrieveWeatherInfo = (lat, long) => {
-  const rawSearchString = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=90bd2e2238cfe623292dac7d2a084e2a`;
+  const rawSearchString = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=MyKey`;
 
   const searchString = encodeURI(rawSearchString);
   
