@@ -1,27 +1,10 @@
-// <!-- Date & location -->
-  // <div class="localInfo">
-  //   <div class="date">Thursday, March 25, 2021</div>
-  //   <div class="city">Cypress, CA</div>
-  // </div>
-
-  // <div class="weatherInfo">
-  //   <!-- Weather image and temperature -->
-  //   <div class="weatherDisplay">
-  //     <img class="logo" src="img/logo.png" alt="">
-  //     10 degree
-  //   </div>
-
-  //   <!-- Weather Details -->
-  //   <div class="weatherDetail">
-  //     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, facere, deserunt soluta, molestias recusandae eius sequi fugiat ad reprehenderit asperiores repellat temporibus distinctio debitis provident est aspernatur architecto? Nobis consequatur doloribus iure molestiae maxime sed tempora vero dolore est voluptas.</p>
-  //   </div>
-  // </div>
+import { sliceDegreeSign } from "./script.js";
+  
 
 export const deleteSearchResults = () => {
   const parentElement = document.getElementById("main-container");
   let child = parentElement.lastElementChild;
-  // console.log(parentElement.childElementCount);
-    // console.log("Here!!!");
+  
   while(child) {
     parentElement.removeChild(child);
     child = parentElement.lastElementChild;
@@ -34,11 +17,7 @@ export const buildSearchResults = (weatherInfo) => {
   const localInfoDiv = createLocalInfoDiv(weatherInfo);
   const weatherInfoDiv = createWeatherInfoDiv(weatherInfo);
 
-  console.log('Hello!');
-
   mainContainer.append(localInfoDiv);
-  console.log('Hello!');
-
   mainContainer.append(weatherInfoDiv);
 
   return mainContainer;
@@ -69,7 +48,6 @@ const createLocalInfoDiv = (weatherInfo) => {
   cityDiv.innerText = city;
   
   localInfoDiv.append(cityDiv);
-  console.log(localInfoDiv);
 
   return localInfoDiv;
 };
@@ -86,28 +64,36 @@ const createWeatherInfoDiv = (weatherInfo) => {
   weatherImg.setAttribute = ("id", "weatherImg");
 
   const weatherDesc = weatherInfo.weather[0].main;
-  console.log(weatherDesc);
 
   const weatherImgUrl = showWeatherImage(weatherDesc);
   weatherImg.src = weatherImgUrl;
   weatherImg.alt = weatherDesc;
 
-  const temperature = document.createElement("div");
-  temperature.classList.add("temperature");
+  const temperatureDiv = document.createElement("div");
+  temperatureDiv.classList.add("temperatureDiv");
 
   const temp = weatherInfo.main.temp.toFixed();
-  temperature.innerText = `${temp}°`;
+  const temperature = processTempByMode(temp);
+  temperatureDiv.innerText = `${temperature}°`;
   
   const weatherDetail = document.createElement("div");
   weatherDetail.classList.add("weatherDetail"); 
 
   const feelsLike = document.createElement("div");
   feelsLike.classList.add("feelsLike"); 
-  feelsLike.innerText = `Feels Like: ${weatherInfo.main.feels_like.toFixed()}°`;
+  const feelsLikeTemp = processTempByMode(weatherInfo.main.feels_like);
+  feelsLike.innerText = `Feels Like: ${feelsLikeTemp}°`;
 
   const tempHighLow = document.createElement("div");
   tempHighLow.classList.add("tempHighLow"); 
-  tempHighLow.innerText = `Temp High / Low: ${weatherInfo.main.temp_max.toFixed()}° / ${weatherInfo.main.temp_min.toFixed()}°`;
+  const tempTextSpan = document.createElement("span");
+  tempTextSpan.classList.add("tempTextSpan");
+  const tempDegreeSpan = document.createElement("span");
+  tempDegreeSpan.classList.add("tempDegreeSpan");
+  const highTemp = processTempByMode(weatherInfo.main.temp_max);
+  const lowTemp = processTempByMode(weatherInfo.main.temp_min);
+  tempTextSpan.innerText = "Temp High / Low: ";
+  tempDegreeSpan.innerText = `${highTemp}° / ${lowTemp}°`;
 
   const wind = document.createElement("div");
   wind.classList.add("wind"); 
@@ -118,7 +104,9 @@ const createWeatherInfoDiv = (weatherInfo) => {
   humidity.innerText = `Humidity: ${weatherInfo.main.humidity} %`;
 
   weatherDisplay.append(weatherImg);
-  weatherDisplay.append(temperature);
+  weatherDisplay.append(temperatureDiv);
+  tempHighLow.append(tempTextSpan);
+  tempHighLow.append(tempDegreeSpan);
   weatherDetail.append(feelsLike);
   weatherDetail.append(tempHighLow);
   weatherDetail.append(wind);
@@ -133,23 +121,42 @@ const showWeatherImage = (weatherDesc) => {
   const category = categorize(weatherDesc);
   let url='';
 
+  // switch(category) {
+  //   case 'partly':
+  //     url = '../img/partly.webp';
+  //     break;
+  //   case 'sun':
+  //     url = '../img/sun.webp';
+  //     break;
+  //   case 'rain':
+  //     url = '../img/rain.webp';
+  //     break;
+  //   case 'wind':
+  //     url = '../img/wind.webp';
+  //     break;
+  //   default:
+  //     url = '../img/cloud.webp';
+  //     break;
+  // }
+
   switch(category) {
     case 'partly':
-      url = '../img/partly.webp';
+      url = '../WeatherApp/img/partly.webp';
       break;
     case 'sun':
-      url = '../img/sun.webp';
+      url = '../WeatherApp/img/sun.webp';
       break;
     case 'rain':
-      url = '../img/drizzle.webp';
+      url = '../WeatherApp/img/rain.webp';
       break;
     case 'wind':
-      url = '../img/wind.webp';
+      url = '../WeatherApp/img/wind.webp';
       break;
     default:
-      url = '../img/cloud.webp';
+      url = '../WeatherApp/img/cloud.webp';
       break;
   }
+
 
   return url;
 }
@@ -170,42 +177,15 @@ const categorize = (str) => {
   }
 }
 
-// const createResultImage = (result) => {
-//   const resultImage = document.createElement("div");
-//   resultImage.classList.add("resultImage");
+const processTempByMode = (tempStr) => {
+  const modeSelector = document.getElementById("modeSelector");
 
-//   const img = document.createElement("img");
-//   img.src = result.img;
-//   img.alt = result.title;
+  const mode = sliceDegreeSign(modeSelector.innerText);
 
-//   resultImage.append(img);
-
-//   return resultImage;
-// };
-
-// const createResultText = (result) => {
-//   const resultText = document.createElement("div");
-//   resultText.classList.add("resultText");
-  
-//   const resultDescription = document.createElement("p");
-//   resultDescription.classList.add("resultDescription");
-//   resultDescription.textContent = result.text;
-
-//   resultText.append(resultDescription);
-  
-//   return resultText;
-// };
-
-// export const clearStatsLine = () => {
-//   document.getElementById("stats").textContent = "";
-// };
-
-// export const setStatsLine = (numberOfResults) => {
-//   const statLine = document.getElementById('stats');
-
-//   if(numberOfResults) {
-//     statLine.textContent = `Displaying ${numberOfResults} results.`;
-//   } else {
-//     statLine.textContent = "Sorry, no results."
-//   }
-// }
+  if(mode === 'C') {
+    const intTemp = parseInt(tempStr);
+    const longTemp = (intTemp - 32) * 5 / 9;
+    const temp = longTemp.toFixed();
+    return temp;
+  } else return tempStr;
+}

@@ -9,7 +9,6 @@
 }
 
 main {
-  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -34,6 +33,24 @@ main {
       width: 100%;
     }
 
+    .front-message {
+      max-width: 50%;
+      padding: 1.5rem;
+      font-size: 1.5em;
+      background-color: lighten($logo-color, 15%);
+      color: $input-color;
+
+      @include mq(768px) {
+        max-width: 70%;
+      }
+
+      @include mq(600px) {
+        max-width: 80%;
+        padding: 1em;
+        font-size: 1.2em;
+      }
+    }
+
     .localInfoDiv {
       display: flex;
       flex-direction: column;
@@ -45,16 +62,20 @@ main {
       font-size: 1.5em;
 
       @include mq(325px) {
-        // margin: 10rem 0 2vh 0;
+        margin-top: 5vh;
         justify-content: flex-end;
       }
 
       .dateDiv,
       .cityDiv {
-        padding: 0.5em 5em;
+        padding: 0.5em 0;
+
+        @include mq(768px) {
+          justify-content: flex-end;
+        }
 
         @include mq(325px) {
-          padding: 0.2em 0.5em;
+          padding: 0.2em 0;
         }
       }
 
@@ -73,11 +94,22 @@ main {
       width: 100%;
       height: 50%;
       // border: 1px solid purple;
+      margin-top: 2em;
       margin-bottom: 2.5em;
       padding: 0 0 1.5em 0;
 
+      @include mq(768px) {
+        margin-top: 5em;
+      }
+
+      @include mq(600px) {
+        justify-content: end;
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+
       @include mq(325px) {
-        margin: 10em 0;
+        margin: 0;
       }
 
       .weatherDisplay {
@@ -86,8 +118,16 @@ main {
         align-items: flex-end;
         justify-content: space-around;
         width: 50%;
-        padding: 1em 4em;
-        // border: 1px solid purple;
+        padding: 1em 4em;        
+
+        @include mq(600px) {
+          align-items: center;
+          padding: 0em 2em;
+        }
+
+        @include mq(1260px) {
+          padding-right: 2em;
+        }
 
         .weatherImg {
           width: 7em;
@@ -97,16 +137,22 @@ main {
           @include animation('fadeIn 1s ease-in-out');
 
           @include mq(325px) {
-            margin: 4em 0;
+            margin: 0;
+            margin-top: 0.5em;
           }
         }
 
-        .temperature {
+        .temperatureDiv {
           font-size: 3em;
           margin: 0.3em;
 
           @include mq(325px) {
             margin-left: 0.3em;
+            font-size: 2em;
+          }
+
+          @include mq(600px) {
+            margin-left: 0.5em;
           }
         }
       }
@@ -119,18 +165,62 @@ main {
         padding: 2em 1em 2em 3em;
         border-left: 2px solid $search-bar-border;
 
+        @include mq(1260px) {
+          padding-left: 2em;
+        }
+
         @include mq(600px) {
+          width: 100%;
+          padding: 2em 1em;
           border: none;
+          align-items: center;
+          // text-align: left;
         }
 
         @include mq(325px) {
           margin-left: 0.3em;
+          padding: 1em 0.2em;
         }
 
         div {
           padding: 0.5em 1em;
           font-weight: 500;
           font-size: 1.2em;
+
+          @include mq(1260px) {
+            // font-size: 1em;
+            padding: 0.5em 0.5em;
+          }
+
+          @include mq(600px) {
+            padding: 0.5em 0;
+            border: none;
+          }
+
+          // .tempHighLowSpan {
+          //   font-size: 1em;
+          //   padding: 0;
+          // }
+        }
+        div + .tempHighLow {
+          @include mq(1260px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            span {
+              padding: 0.2em 0;
+            }
+          }
+
+          @include mq(600px) {
+            align-items: center;
+          }
+
+          @include mq(325px) {
+            align-items: center;
+            padding: 0;
+          }
         }
       }
 

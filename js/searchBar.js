@@ -32,5 +32,6 @@ export const clearPushListener = (event) => {
     event.preventDefault();
 
     document.getElementById("clear").click();
+
   }
 };

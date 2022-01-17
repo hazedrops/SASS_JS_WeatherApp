@@ -1,14 +1,12 @@
 'use strict';
 
 import { setSearchFocus, showClearTextButton, clearSearchText, clearPushListener } from "./searchBar.js";
-// import { deleteSearchResults, buildSearchResults } from "./searchResults.js";
 import { deleteSearchResults, buildSearchResults } from "./searchResults.js";
 import { getSearchTerm, retrieveLatLong } from "./dataHandling.js";
 
 document.addEventListener("readystatechange", (event) => {
   if(event.target.readyState === 'complete') {
     initApp();
-    console.log(event.target.readyState)
   }
 });
 
@@ -26,6 +24,9 @@ const initApp = () => {
 
   const form = document.getElementById("searchBar");
   form.addEventListener("submit", submitTheSearch);
+
+  const mode = document.getElementById("mode");
+  mode.addEventListener("click", convertMode);  
 }
 
 // Procedural "workflow" function 
@@ -38,15 +39,13 @@ const submitTheSearch = (event) => {
   // Process the search
   processTheSearch();
 
-  // // Set the focus
-  // setSearchFocus();
+  // Set the focus
+  setSearchFocus();
 };
 
 // Procedural
 const processTheSearch = async () => {
   const searchTerm = getSearchTerm();
-
-  // console.log("here", searchTerm);
   
   if (searchTerm === "") {
     setSearchFocus();
@@ -54,13 +53,59 @@ const processTheSearch = async () => {
   } 
 
   const weatherInfo = await retrieveLatLong(searchTerm);
-  console.log(weatherInfo);
-
 
   // If there are any results, build search results
   if(!weatherInfo) return;
   
   buildSearchResults(weatherInfo);
-
-  
 };
+
+const convertMode = (event) => {
+  event.preventDefault();
+
+  const mode = sliceDegreeSign();
+
+  makeConversion(mode);
+
+  setSearchFocus();
+};
+
+export const sliceDegreeSign = () => {
+  const tempModeValue = document.getElementById("mode").innerText;
+  const modeValue = tempModeValue.slice(-1);
+
+  return modeValue;
+}
+
+const makeConversion = (modeValue) => {
+  switch(modeValue){
+    case 'C':
+      // Change the C -> F   
+      const modeSelector1 = document.getElementById("modeSelector");
+      modeSelector1.innerText = "°F"
+      deleteSearchResults();
+      processTheSearch();
+      break;
+
+    case 'F':
+      // Change the F -> C
+      const modeSelector2 = document.getElementById("modeSelector");
+      modeSelector2.innerText = "°C"
+      deleteSearchResults();
+      processTheSearch();
+      break;
+
+    default:
+  }
+
+};  
+
+// When the logo image is clicked, refresh the page
+const refreshPage = (event) => {
+  event.preventDefault();
+  window.location.reload();
+}
+
+const logo = document.getElementById("logo");
+logo.addEventListener("click", refreshPage);
+

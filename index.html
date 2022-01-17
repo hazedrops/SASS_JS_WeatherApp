@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
       integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
       crossorigin="anonymous" />
+    <link rel="icon" type="image/x-icon" href="img/myLogo.ico">
     <link rel="stylesheet" href="dist/css/style.min.css" />
-    <script src="skycons-master/skycons.js" defer></script>
+    <script src='./js/config.js'></script>
     <script src="./js/script.js" type="module" defer></script>
     <title>Weather</title>
   </head>
@@ -20,7 +21,11 @@
       <nav class="nav" id="nav">
         <div class="nav-container">
           <!-- logo in the nav bar -->
-          <div><img class="logo" src="img/logo.png" alt=""></div>
+          <div>
+            <a href="#">
+              <img class="logo" id="logo" src="img/logo.png" alt="">
+            </a>
+          </div>
 
           <!-- search bar in the nav bar -->
           <form id="searchBar" class="searchBar" role="search">
@@ -29,36 +34,25 @@
               <i class="fas fa-times"></i>
             </div>
             <button id="searchButton" class="button searchButton" type="submit" aria-label="Submit button">
-              <i class="fas fa-search blue"></i>
+              <i class="fas fa-search"></i>
             </button>
           </form>
 
           <!-- F/C selection -->
-          <div class="mode">
-            <span class="modeSelector" id="fahrenheit">°F</span>
-            <span class="none modeSelector" id="celsius">°C</span>
+          <div class="mode" id="mode">
+            <span id="modeSelector" class="modeSelector">°F</span>
+            <!-- <span class="none modeSelector" id="celsius">°C</span> -->
           </div>
         </div>
       </nav>
 
       <main>
-        <div class="main-container" id="main-container"></div>
+        <div class="main-container" id="main-container">
+          <div class="front-message">Enter a City Name<br> or a Zip Code <br>in the search bar</div>
+        </div>
       </main>
     </div>
     
-    <!-- <div class="location">
-      <h1 class="timezone">Timezone</h1>
-      <canvas id="icon" width="128" height="128">XXX</canvas>
-    </div>
-    <div class="temperature">
-      <div class="degree-section">
-        <h2 class="degree">34</h2>
-        <span>F</span>
-      </div>
-      <div class="description">Its Cold!</div>
-    </div> -->
-
-    <!-- <script src="skycons-master/skycons.js"></script> -->
   </body>
 
 </html>
