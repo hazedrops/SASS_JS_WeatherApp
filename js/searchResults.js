@@ -91,6 +91,7 @@ const createWeatherInfoDiv = (weatherInfo) => {
   const tempDegreeSpan = document.createElement("span");
   tempDegreeSpan.classList.add("tempDegreeSpan");
   const highTemp = processTempByMode(weatherInfo.main.temp_max);
+  console.log(typeof(highTemp));
   const lowTemp = processTempByMode(weatherInfo.main.temp_min);
   tempTextSpan.innerText = "Temp High / Low: ";
   tempDegreeSpan.innerText = `${highTemp}° / ${lowTemp}°`;
@@ -167,5 +168,5 @@ const processTempByMode = (tempStr) => {
     const longTemp = (intTemp - 32) * 5 / 9;
     const temp = longTemp.toFixed();
     return temp;
-  } else return tempStr;
+  } else return parseInt(tempStr).toString();
 }
