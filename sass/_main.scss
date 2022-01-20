@@ -11,32 +11,27 @@
 main {
   height: 100%;
   display: flex;
-  justify-content: center;
-  // align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 14vh;
 
   .main-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // justify-content: flex-end;
     align-items: center;
-    // padding-top: 20vh;
     width: 70%;
     height: 100vh;
     color: $text-color;
 
-    @include mq(600px) {
-      width: 80%;
-    }
-
-    @include mq(325px) {
-      width: 100%;
-    }
-
     .front-message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       max-width: 50%;
       padding: 1.5rem;
       font-size: 1.5em;
+      line-height: 1.2;
       background-color: lighten($logo-color, 15%);
       color: $input-color;
 
@@ -45,6 +40,7 @@ main {
       }
 
       @include mq(600px) {
+        margin-top: 20vh;
         max-width: 80%;
         padding: 1em;
         font-size: 1.2em;
@@ -56,15 +52,9 @@ main {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      // background-color: yellow;
       width: 100%;
-      margin-top: 15vh;
+      // margin-top: 15vh;
       font-size: 1.5em;
-
-      @include mq(325px) {
-        margin-top: 5vh;
-        justify-content: flex-end;
-      }
 
       .dateDiv,
       .cityDiv {
@@ -79,38 +69,26 @@ main {
         }
       }
 
-      // .cityDiv {
-      //   box-shadow: rgba(46, 129, 193, 0.3) 0px 10px 10px -10px;
-      // }
+      @include mq(600px) {
+        justify-content: flex-start;
+        margin-top: 5vh;
+      } 
+
+      @include mq(325px) {
+        justify-content: flex-end;
+      }
     }
 
     .weatherInfoDiv {
-      // background-color: purple;
       color: $text-color;
       display: flex;
-      // flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100%;
       height: 50%;
-      // border: 1px solid purple;
       margin-top: 2em;
       margin-bottom: 2.5em;
       padding: 0 0 1.5em 0;
-
-      @include mq(768px) {
-        margin-top: 5em;
-      }
-
-      @include mq(600px) {
-        justify-content: end;
-        margin-top: 1em;
-        margin-bottom: 1em;
-      }
-
-      @include mq(325px) {
-        margin: 0;
-      }
 
       .weatherDisplay {
         display: flex;
@@ -118,22 +96,12 @@ main {
         align-items: flex-end;
         justify-content: space-around;
         width: 50%;
-        padding: 1em 4em;        
-
-        @include mq(600px) {
-          align-items: center;
-          padding: 0em 2em;
-        }
-
-        @include mq(1260px) {
-          padding-right: 2em;
-        }
-
+        padding: 1em 4em;   
+        
         .weatherImg {
           width: 7em;
           height: 7em;
-          // padding-right: 1em;
-          // transform: translateY(3em);
+
           @include animation('fadeIn 1s ease-in-out');
 
           @include mq(325px) {
@@ -146,15 +114,20 @@ main {
           font-size: 3em;
           margin: 0.3em;
 
+          @include mq(600px) {
+            margin-left: 0.5em;
+          }
+
           @include mq(325px) {
             margin-left: 0.3em;
             font-size: 2em;
           }
-
-          @include mq(600px) {
-            margin-left: 0.5em;
-          }
         }
+
+        @include mq(600px) {
+          align-items: center;
+          padding: 0em 2em;
+        }       
       }
 
       .weatherDetail {
@@ -169,12 +142,15 @@ main {
           padding-left: 2em;
         }
 
+        @include mq(768px) {
+          padding: 0 0 0 1.5em;
+        }
+
         @include mq(600px) {
           width: 100%;
-          padding: 2em 1em;
+          padding: 1em;
           border: none;
           align-items: center;
-          // text-align: left;
         }
 
         @include mq(325px) {
@@ -188,7 +164,6 @@ main {
           font-size: 1.2em;
 
           @include mq(1260px) {
-            // font-size: 1em;
             padding: 0.5em 0.5em;
           }
 
@@ -196,12 +171,8 @@ main {
             padding: 0.5em 0;
             border: none;
           }
-
-          // .tempHighLowSpan {
-          //   font-size: 1em;
-          //   padding: 0;
-          // }
         }
+
         div + .tempHighLow {
           @include mq(1260px) {
             display: flex;
@@ -226,11 +197,24 @@ main {
 
       @include mq(600px) {
         flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 1em;
+        margin-bottom: 1em;
       }
 
-      // @include mq(325) {
-      //   flex-direction: column;
-      // }
+      @include mq(325px) {
+        margin: 0;
+      }
+    }
+    
+    @include mq(600px) {
+      justify-content: flex-start;
+      align-item: center;
+      width: 80%;
+    }
+
+    @include mq(325px) {
+      width: 100%;
     }
   }
 }

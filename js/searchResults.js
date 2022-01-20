@@ -121,24 +121,6 @@ const showWeatherImage = (weatherDesc) => {
   const category = categorize(weatherDesc);
   let url='';
 
-  // switch(category) {
-  //   case 'partly':
-  //     url = '../img/partly.webp';
-  //     break;
-  //   case 'sun':
-  //     url = '../img/sun.webp';
-  //     break;
-  //   case 'rain':
-  //     url = '../img/rain.webp';
-  //     break;
-  //   case 'wind':
-  //     url = '../img/wind.webp';
-  //     break;
-  //   default:
-  //     url = '../img/cloud.webp';
-  //     break;
-  // }
-
   switch(category) {
     case 'partly':
       url = '../WeatherApp/img/partly.webp';
@@ -156,8 +138,6 @@ const showWeatherImage = (weatherDesc) => {
       url = '../WeatherApp/img/cloud.webp';
       break;
   }
-
-
   return url;
 }
 

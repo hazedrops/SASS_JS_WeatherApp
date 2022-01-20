@@ -13,11 +13,7 @@ nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 90vh;
-
-    @include mq(600px) {
-      width: 100%;
-    }
+    width: 90vh;    
 
     div {
       .logo {
@@ -34,11 +30,7 @@ nav {
       align-items: center;
       border: 2px solid $search-bar-border;
       border-radius: 400px;
-      padding: 0.2rem 0.25rem 0.2rem 0.75rem;
-
-      @include mq(375px) {
-        padding: 0.2rem 0.25rem 0.2rem 0.75rem;
-      }
+      padding: 0.2rem 0.25rem 0.2rem 0.75rem;      
 
       input[type='text'] {
         background: transparent;
@@ -124,6 +116,10 @@ nav {
           color: $logo-color;
         }
       }
+
+      @include mq(375px) {
+        padding: 0.2rem 0.25rem 0.2rem 0.75rem;
+      }
     }
 
     .modeSelector {
@@ -131,6 +127,10 @@ nav {
       background: $background-color-light;
       padding: 0.3rem;
       border-radius: 50%;
+    }
+
+    @include mq(600px) {
+      width: 100%;
     }
   }
 }

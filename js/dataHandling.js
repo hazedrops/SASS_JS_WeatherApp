@@ -18,8 +18,6 @@ export const retrieveLatLong = async (searchTerm) => {
 
   const tempData = geoCodes.results[0].locations[0];
 
-  let resultArray = [];
-
   const lat = tempData.latLng.lat;
   const long = tempData.latLng.lng;
 
@@ -29,8 +27,7 @@ export const retrieveLatLong = async (searchTerm) => {
   return weatherInfo;
 };
 
-const getGeoCodeData = (searchTerm) => {
-  // const rawSearchString = `http://www.mapquestapi.com/geocoding/v1/address?key=Pzhrs2ylWGmTmpobTAkxGdGaVrdCIfhU&location=${searchTerm}`;
+const getGeoCodeData = (searchTerm) => {  
   const rawSearchString = `http://www.mapquestapi.com/geocoding/v1/address?key=${config.apiKey}&location=${searchTerm}`;
 
 
